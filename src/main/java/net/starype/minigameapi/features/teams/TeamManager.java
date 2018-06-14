@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.bukkit.Location;
 
-import net.starype.core.Feature;
-import net.starype.core.MiniGameCore;
+import net.starype.minigameapi.core.Feature;
+import net.starype.minigameapi.core.MiniGameCore;
 
 public class TeamManager implements Feature {
 
@@ -48,7 +48,7 @@ public class TeamManager implements Feature {
 	}
 	
 	@Override
-	public Class<?> getFeature() {
+	public Class<? extends Feature> getFeature() {
 		return TeamManager.class;
 	}
 

@@ -1,13 +1,14 @@
 package net.starype.minigameapi.features.events;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
-import net.starype.core.Feature;
-import net.starype.core.MiniGameCore;
+import net.starype.minigameapi.core.Feature;
+import net.starype.minigameapi.core.MiniGameCore;
 
 public class JoinExitManager implements Feature, Listener {
 
@@ -23,6 +24,8 @@ public class JoinExitManager implements Feature, Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		
+		Player player = event.getPlayer();
+		
 	}
 	@EventHandler
 	public void onLeave(PlayerQuitEvent event) {
@@ -30,7 +33,7 @@ public class JoinExitManager implements Feature, Listener {
 	}
 	
 	@Override
-	public Class<?> getFeature() {
+	public Class<? extends Feature> getFeature() {
 		return JoinExitManager.class;
 	}
 

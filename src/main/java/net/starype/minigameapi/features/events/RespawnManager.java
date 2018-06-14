@@ -10,8 +10,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.Plugin;
 
-import net.starype.core.Feature;
-import net.starype.core.MiniGameCore;
+import net.starype.minigameapi.core.Feature;
+import net.starype.minigameapi.core.MiniGameCore;
 
 public class RespawnManager implements Feature, Listener {
 
@@ -45,7 +45,7 @@ public class RespawnManager implements Feature, Listener {
 	}
 	
 	@Override
-	public Class<?> getFeature() {
+	public Class<? extends Feature> getFeature() {
 		return null;
 	}
 

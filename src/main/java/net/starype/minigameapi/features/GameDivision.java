@@ -63,7 +63,7 @@ public class GameDivision implements Feature {
 	}
 
 	@Override
-	public Class<?> getFeature() {
+	public Class<? extends Feature> getFeature() {
 		
 		return GameDivision.class;
 	}

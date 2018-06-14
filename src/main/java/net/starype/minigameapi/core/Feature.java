@@ -2,7 +2,7 @@ package net.starype.minigameapi.core;
 
 public interface Feature {
 
-	Class<?> getFeature();
+	Class<? extends Feature> getFeature();
 	
 	void addAsFeature();
 }
