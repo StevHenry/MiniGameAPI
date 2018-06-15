@@ -2,6 +2,7 @@ package net.starype.minigameapi.features.polyvalent;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -53,31 +54,19 @@ public class RespawnManager implements Feature, Listener, Linkable {
 
 	/**
 	 * 
-	 * @param source : The MiniGame instance you want to complete with this feature
-	 * @param main : The JavaPlugin instance, used to register the Listener
-	 * @param defaultActions : The list of default actions applied if the instance is not linked
-	 * or if the instance is linked and defaultActionIfLinked is true
+	 * @param source
+	 * 	The MiniGame instance you want to complete with this feature
+	 * @param main
+	 * 	The JavaPlugin instance, used to register the Listener
+	 * @param defaultActions
+	 * 	The list of default actions applied if the instance is not linked
+	 * 	or if the instance is linked and defaultActionIfLinked is true
 	 */
 	public RespawnManager(MiniGameCore source, Plugin main, List<Respawn> defaultActions) {
 
 		this.source = source;
 		this.main = main;
 		this.defaultActions = defaultActions;
-	}
-	
-	/**
-	 * <p>If link function is called, it means that the defaultAction won't be called anymore except if
-	 * withDefaultActions(true) is called, and no action is defined for the current state.
-	 * @throws IllegalStateException if GameDivision has not already been added as a feature
-	 * in the MiniGameCore instance
-	 */
-	@Override
-	public void link() {
-
-		linked = true;
-		division = source.getFeature(GameDivision.class);
-
-		if(division == null) throw new IllegalStateException("Cannot link if GameDivision is undefined");
 	}
 
 	/**
@@ -125,14 +114,6 @@ public class RespawnManager implements Feature, Listener, Linkable {
 				return;
 			}
 	}
-	
-	/**
-	 *  Overrided method from the Feature interface
-	 */
-	@Override
-	public Class<? extends Feature> getFeature() {
-		return getClass();
-	}
 
 	/**
 	 *  <p>Overrided method from the {@link Feature} interface </p>
@@ -143,7 +124,7 @@ public class RespawnManager implements Feature, Listener, Linkable {
 	public void addAsFeature() {
 
 		source.getFeatures().add(this);
-		main.getServer().getPluginManager().registerEvents(this, main);
+		Bukkit.getPluginManager().registerEvents(this, main);
 	}
 
 	@EventHandler
@@ -166,7 +147,6 @@ public class RespawnManager implements Feature, Listener, Linkable {
 	}
 
 	/**
-	 * 
 	 * @return the respawn mode that can be defined at {@link RespawnManager#setMode(RespawnMode)}
 	 */
 	public RespawnMode getMode() {
@@ -174,7 +154,6 @@ public class RespawnManager implements Feature, Listener, Linkable {
 	}
 
 	/**
-	 * 
 	 * @param mode, the new mode that has to be defined
 	 */
 	public void setMode(RespawnMode mode) {
@@ -182,7 +161,6 @@ public class RespawnManager implements Feature, Listener, Linkable {
 	}
 
 	/**
-	 * 
 	 * @return the mini game source
 	 */
 	public MiniGameCore getSource() {
@@ -191,19 +169,39 @@ public class RespawnManager implements Feature, Listener, Linkable {
 
 	/**
 	 * Enum that lists the two possible RespawnModes
-	 *
 	 */
 	public enum RespawnMode {
 
 		AFTER_DEATH, ZERO_LIFE_POINTS
 	}
+	
+	/**
+	 * <p>If link function is called, it means that the defaultAction won't be called anymore except if
+	 * withDefaultActions(true) is called, and no action is defined for the current state.</p>
+	 * 
+	 * @throws IllegalStateException if GameDivision has not already been added as a feature
+	 * in the MiniGameCore instance
+	 */
+	@Override
+	public void link() {
 
+		linked = true;
+		division = source.getFeature(GameDivision.class);
+
+		if(division == null) throw new IllegalStateException("Cannot link if GameDivision is undefined");
+	}
 
 	@Override
 	public Class<? extends Feature> getLinkedTo() {
 
 		return GameDivision.class;
 	}
-
-}	
-
+	
+	/**
+	 *  Overrided method from the Feature interface
+	 */
+	@Override
+	public Class<? extends Feature> getFeature() {
+		return getClass();
+	}
+}

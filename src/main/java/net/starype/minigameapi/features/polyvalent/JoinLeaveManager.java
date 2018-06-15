@@ -1,5 +1,6 @@
 package net.starype.minigameapi.features.polyvalent;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -25,6 +26,7 @@ public class JoinLeaveManager implements Listener, Feature, Linkable {
 	// null if JoinLManager is not linked
 	private GameDivision divisor;
 	
+	private Plugin main;
 	/*
 	 *  Default action containing onJoin() and onLeave() if current state isn't a {@link State} 
 	 *  Defined in the constructor below
@@ -43,9 +45,6 @@ public class JoinLeaveManager implements Listener, Feature, Linkable {
 	 * See withDefaultActions(boolean b) method for further information
 	 */
 	private boolean defaultActionIfLinked = false;
-	
-	// JavaPlugin instance, defined in the constructor
-	private Plugin main;
 	
 	/**
 	 * 
@@ -152,9 +151,8 @@ public class JoinLeaveManager implements Listener, Feature, Linkable {
 	 */
 	@Override
 	public void addAsFeature() {
-		
 		core.getFeatures().add(this);
-		main.getServer().getPluginManager().registerEvents(this, main);
+		Bukkit.getPluginManager().registerEvents(this, main);
 	}
 
 	@Override
