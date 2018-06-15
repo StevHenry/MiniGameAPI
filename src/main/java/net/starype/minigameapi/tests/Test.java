@@ -1,15 +1,10 @@
 package net.starype.minigameapi.tests;
 
-import org.bukkit.Bukkit;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.GameDivision;
-import net.starype.minigameapi.features.events.NONUSEDCLASS_JoinExitManager;
 import net.starype.minigameapi.features.events.JoinLeaveManager;
-import net.starype.minigameapi.features.events.JoinLeaveAction;
 
 /**
  * 
@@ -26,18 +21,6 @@ public class Test extends JavaPlugin {
 		div.addStep(new ExampleState()); //là, c'est un state qui gère les events
 		div.addStep(new ExampleState2()); //là non
 		
-		Bukkit.getPluginManager().registerEvents(new JoinLeaveManager(core, null, new JoinLeaveAction() {
-			
-			@Override
-			public void onLeave(PlayerQuitEvent event) {
-				event.setQuitMessage("il a leave lekon");
-			}
-			
-			@Override
-			public void onJoin(PlayerJoinEvent event) {
-				event.setJoinMessage("il a join lekon");
-			}
-		}), this);
 		
 		/*
 		 On peut créer une class dédiée mais pour l'exemple j'instancie direct comme ça 
@@ -58,18 +41,6 @@ public class Test extends JavaPlugin {
 		div.addStep(null, WAITING);
 		div.addStep(null, STARTING);
 		div.addStep(null, PLAYING);
-
-		NONUSEDCLASS_JoinExitManager joinexit = new NONUSEDCLASS_JoinExitManager(core, null);
-		joinexit.link();
-		
-		joinexit.addJoinAction(null, WAITING);
-		joinexit.addJoinAction(null, STARTING);
-		joinexit.addJoinAction(null, PLAYING);
-		
-		joinexit.addLeaveAction(null, WAITING);
-		joinexit.addLeaveAction(null, STARTING);
-		joinexit.addLeaveAction(null, PLAYING);
-		
 		
 	}
 	

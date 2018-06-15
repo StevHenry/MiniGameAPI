@@ -148,4 +148,19 @@ public class JoinLeaveManager implements Listener, Feature {
 		core.getFeatures().add(this);
 		main.getServer().getPluginManager().registerEvents(this, main);
 	}
+	
+	/**
+	 * Interace in class JoinLeaveManager, that is used in the <code>addStep</code> function in class 
+	 * {@link GameDivision} </p>
+	 * 
+	 * @author Askigh & Steven
+	 *
+	 */
+	public interface JoinLeaveAction {
+		
+		void onJoin(PlayerJoinEvent event);
+		
+		void onLeave(PlayerQuitEvent event);
+
+	}
 }

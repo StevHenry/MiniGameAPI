@@ -5,7 +5,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.starype.minigameapi.features.GameDivision.StateChangeAction;
-import net.starype.minigameapi.features.events.JoinLeaveAction;
+import net.starype.minigameapi.features.events.JoinLeaveManager.JoinLeaveAction;
 
 public class ExampleState implements StateChangeAction, JoinLeaveAction {
 
