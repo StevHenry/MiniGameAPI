@@ -7,9 +7,7 @@ import net.starype.minigameapi.features.polyvalent.JoinLeaveManager;
 import net.starype.minigameapi.features.standard.GameDivision;
 
 /**
- * 
- * @usage : This class is just used to do tests, it's not usefull at all
- *
+ * <p>This class is just used to do tests, it's not usefull at all</p>
  */
 public class Test extends JavaPlugin {
 	
@@ -23,7 +21,7 @@ public class Test extends JavaPlugin {
 		
 		/*
 		 On peut créer une class dédiée mais pour l'exemple j'instancie direct comme ça 
-		 */
+		*/
 	}
 	
 	private MiniGameCore core;

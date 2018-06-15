@@ -1,8 +1,7 @@
 net.starype.minigameapi.core
-net.starype.minigameapi.features
 net.starype.minigameapi.features.action
-net.starype.minigameapi.features.events
 net.starype.minigameapi.features.polyvalent
-net.starype.minigameapi.features.teams
+net.starype.minigameapi.features.standard
+net.starype.minigameapi.features.subfeature
 net.starype.minigameapi.samples
 net.starype.minigameapi.tests

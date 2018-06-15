@@ -19,10 +19,9 @@ public class MiniGameCore {
 	}
 	
 	/**
-	 * 
 	 * @return the list of all the present features.
-	 * If you can't find a specific feature in the Set, 
-	 * make sure you've called addAsFeature() function earlier
+	 * <p>If you can't find a specific feature in the Set, 
+	 * make sure you've called addAsFeature() function earlier</p>
 	 */
 	public Set<Feature> getFeatures() {	
 		return features;
@@ -30,8 +29,9 @@ public class MiniGameCore {
 	
 	/**
 	 * 
-	 * @param source : The feature you want to get using {@code NameOfFeature.class}
-	 * @return The feature needed
+	 * @param source
+	 * 	The feature you want to get using {@code NameOfFeature.class}
+	 * @return The needed feature
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Feature> T getFeature(Class<?> source) {

@@ -6,11 +6,11 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import net.starype.minigameapi.features.standard.GameDivision;
 
 /**
- * Interace that is used in the {@link GameDivision#addStep(net.starype.minigameapi.features.GameDivision.StateChangeAction)} function in class 
- * {@link GameDivision} </p>
+ * <p>Interace that is used in the {@link GameDivision#addStep(StateChangeAction)} function in class 
+ * {@link GameDivision}</p>
  * 
- * @author Askigh & Steven
- *
+ * @author Askigh
+ * @author Steven
  */
 public interface JoinLeaveAction {
 	

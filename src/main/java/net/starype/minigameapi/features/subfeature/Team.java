@@ -11,13 +11,12 @@ import org.bukkit.entity.Player;
 import net.starype.minigameapi.features.standard.TeamManager;
 
 /**
+ * <p>Team is a basic class containing all the information you could need to add teams into your game</p>
+ * <p>Do not call the constructor unless you have a good reason, you should use <code>addNewTeam</code> from {@link TeamManager}  
+ * instead.</p>
  * 
- * Team is a basic class containing all the information you could need to add teams into your game
- * </p>
- * Do not call the constructor unless you have a good reason, you should use <code>addNewTeam</code> from {@link TeamManager} 
- * instead.
  * @author Askigh
- *
+ * @author Steven
  */
 public class Team {
 	
