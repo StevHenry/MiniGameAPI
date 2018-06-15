@@ -7,10 +7,12 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
-import net.starype.minigameapi.core.Feature;
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.action.JoinLeaveAction;
 import net.starype.minigameapi.features.standard.GameDivision;
+import net.starype.minigameapi.features.types.StandardFeature;
+import net.starype.minigameapi.features.types.PolyvalentFeature;
+import net.starype.minigameapi.features.types.SubFeature;
 
 /**
  * 
@@ -21,7 +23,7 @@ import net.starype.minigameapi.features.standard.GameDivision;
  * @author Askigh
  * @author Steven
  */
-public class JoinLeaveManager implements Listener, Feature, Linkable {
+public class JoinLeaveManager implements Listener, PolyvalentFeature {
 
 	// null if JoinLManager is not linked
 	private GameDivision divisor;
@@ -70,13 +72,15 @@ public class JoinLeaveManager implements Listener, Feature, Linkable {
 	 * @throws IllegalStateException if GameDivision has not already been added as a feature
 	 * in the MiniGameCore instance
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public void link() {
+	public <T extends SubFeature> T link() {
 		
 		linked = true;
-		divisor = core.getFeature(GameDivision.class);
+		divisor = core.getFeature(GameDivision.class).get();
 		
 		if(divisor == null) throw new IllegalStateException("Cannot link if GameDivision is undefined");
+		return (T) this;
 	}
 	
 	/**
@@ -140,12 +144,12 @@ public class JoinLeaveManager implements Listener, Feature, Linkable {
 	 *  Overrided method from the Feature interface
 	 */
 	@Override
-	public Class<? extends Feature> getFeature() {
+	public Class<? extends StandardFeature> getFeature() {
 		return getClass();
 	}
 	
 	/**
-	 *  <p>Overrided method from the {@link Feature} interface </p>
+	 *  <p>Overrided method from the {@link StandardFeature} interface </p>
 	 *  <p>Also adds the instance as an event using the JavaPlugin parameter defined
 	 *  in the constructor</p>
 	 */
@@ -156,7 +160,7 @@ public class JoinLeaveManager implements Listener, Feature, Linkable {
 	}
 
 	@Override
-	public Class<? extends Feature> getLinkedTo() {
+	public Class<? extends StandardFeature> getLinkedTo() {
 		return GameDivision.class;
 	}
 

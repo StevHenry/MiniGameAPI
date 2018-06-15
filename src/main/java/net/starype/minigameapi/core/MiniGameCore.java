@@ -1,21 +1,24 @@
 package net.starype.minigameapi.core;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+
+import net.starype.minigameapi.features.types.StandardFeature;
 
 public class MiniGameCore {
 
 	/**
-	 * This Set regroups all the used {@link Feature}s
+	 * This Set regroups all the used {@link StandardFeature}s
 	 */
-	private Set<Feature> features;
+	private Set<StandardFeature> features;
 	
 	/**
 	 * Create a simple MiniGameCore instance, and init the features Set
 	 */
 	public MiniGameCore() {
 		
-		this.features = new HashSet<Feature>();
+		this.features = new HashSet<StandardFeature>();
 	}
 	
 	/**
@@ -23,7 +26,7 @@ public class MiniGameCore {
 	 * <p>If you can't find a specific feature in the Set, 
 	 * make sure you've called addAsFeature() function earlier</p>
 	 */
-	public Set<Feature> getFeatures() {	
+	public Set<StandardFeature> getFeatures() {	
 		return features;
 	}
 	
@@ -34,12 +37,12 @@ public class MiniGameCore {
 	 * @return The needed feature
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Feature> T getFeature(Class<?> source) {
+	public <T extends StandardFeature> Optional<T> getFeature(Class<T> source) {
 		
-		for(Feature f : features)
+		for(StandardFeature f : features)
 			if(f.getFeature().equals(source))
-				return (T) f;
+				return Optional.of((T) f);
 		
-		return null;
+		return Optional.empty();
 	}
 }

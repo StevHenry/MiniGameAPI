@@ -1,13 +1,11 @@
-package net.starype.minigameapi.features.polyvalent;
+package net.starype.minigameapi.features.types;
 
-import net.starype.minigameapi.features.types.StandardFeature;
-
-public interface Linkable {
+public interface SubFeature {
 
 	/**
 	 * Generic method that is used to link the instance to an other Feature
 	 */
-	void link();
+	<T extends SubFeature> T link();
 	
 	/**
 	 * 

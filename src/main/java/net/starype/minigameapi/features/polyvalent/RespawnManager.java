@@ -10,10 +10,12 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.Plugin;
 
-import net.starype.minigameapi.core.Feature;
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.action.RespawnAction;
 import net.starype.minigameapi.features.standard.GameDivision;
+import net.starype.minigameapi.features.types.StandardFeature;
+import net.starype.minigameapi.features.types.PolyvalentFeature;
+import net.starype.minigameapi.features.types.SubFeature;
 
 /**
  * <p>RespawnManager is a Polyvalent Feature, therefore it that can be used as a feature alone or as a sub feature
@@ -23,7 +25,7 @@ import net.starype.minigameapi.features.standard.GameDivision;
  * @author Askigh
  *
  */
-public class RespawnManager implements Feature, Listener, Linkable {
+public class RespawnManager implements Listener, PolyvalentFeature {
 	
 	// null if JoinLManager is not linked
 	private GameDivision division;
@@ -116,7 +118,7 @@ public class RespawnManager implements Feature, Listener, Linkable {
 	}
 
 	/**
-	 *  <p>Overrided method from the {@link Feature} interface </p>
+	 *  <p>Overrided method from the {@link StandardFeature} interface </p>
 	 *  <p>Also adds the instance as an event using the JavaPlugin parameter defined
 	 *  in the constructor</p>
 	 */
@@ -182,17 +184,19 @@ public class RespawnManager implements Feature, Listener, Linkable {
 	 * @throws IllegalStateException if GameDivision has not already been added as a feature
 	 * in the MiniGameCore instance
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public void link() {
+	public <T extends SubFeature> T link() {
 
 		linked = true;
-		division = source.getFeature(GameDivision.class);
-
+		division = source.getFeature(GameDivision.class).get();
+		
 		if(division == null) throw new IllegalStateException("Cannot link if GameDivision is undefined");
+		return (T) this;
 	}
 
 	@Override
-	public Class<? extends Feature> getLinkedTo() {
+	public Class<? extends StandardFeature> getLinkedTo() {
 
 		return GameDivision.class;
 	}
@@ -201,7 +205,7 @@ public class RespawnManager implements Feature, Listener, Linkable {
 	 *  Overrided method from the Feature interface
 	 */
 	@Override
-	public Class<? extends Feature> getFeature() {
+	public Class<? extends StandardFeature> getFeature() {
 		return getClass();
 	}
 }

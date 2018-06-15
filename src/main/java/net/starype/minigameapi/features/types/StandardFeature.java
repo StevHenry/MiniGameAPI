@@ -1,4 +1,4 @@
-package net.starype.minigameapi.core;
+package net.starype.minigameapi.features.types;
 
 import net.starype.minigameapi.features.standard.GameDivision;
 
@@ -12,7 +12,7 @@ import net.starype.minigameapi.features.standard.GameDivision;
  * 	<li>{@link GameDivision}</li>
  * </ul>
  */
-public interface Feature {
+public interface StandardFeature {
 
 	/**
 	 * <p>Abstract method used to get which Feature you target</p>
@@ -20,7 +20,7 @@ public interface Feature {
 	 * 
 	 * @return the feature from the class put in parameter
 	 */
-	Class<? extends Feature> getFeature();
+	Class<? extends StandardFeature> getFeature();
 	
 	/**
 	 * <p>Adds the instance in the MiniGameCore defined in the constructor</p>

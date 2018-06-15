@@ -3,11 +3,11 @@ package net.starype.minigameapi.features.standard;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.starype.minigameapi.core.Feature;
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.action.JoinLeaveAction;
 import net.starype.minigameapi.features.action.StateChangeAction;
 import net.starype.minigameapi.features.polyvalent.JoinLeaveManager;
+import net.starype.minigameapi.features.types.StandardFeature;
 
 /**
  * <p>GameDivision is feature allowing you to cut your game in different parts.</p>
@@ -25,7 +25,7 @@ import net.starype.minigameapi.features.polyvalent.JoinLeaveManager;
  * </p>
  * @author <p>Steven comments added by Askigh</p>
  */
-public class GameDivision implements Feature {
+public class GameDivision implements StandardFeature {
 
 	// The MiniGame instance you want to complete with this feature, defined in the constructor
 	private MiniGameCore source;
@@ -70,7 +70,7 @@ public class GameDivision implements Feature {
 	}
 
 	@Override
-	public Class<? extends Feature> getFeature() {
+	public Class<? extends StandardFeature> getFeature() {
 		
 		return getClass();
 	}

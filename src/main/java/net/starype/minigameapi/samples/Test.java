@@ -1,4 +1,4 @@
-package net.starype.minigameapi.tests;
+package net.starype.minigameapi.samples;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -43,9 +43,10 @@ public class Test extends JavaPlugin {
 	
 	public void otherTest() {
 		
-		JoinLeaveManager jlManager = new JoinLeaveManager(core, null, null);
+		JoinLeaveManager jlManager = new JoinLeaveManager(core, null, null)
+				.withDefaultActions(true)
+				.link();
 		
-		jlManager.addAsFeature();
 	}
 	
 
