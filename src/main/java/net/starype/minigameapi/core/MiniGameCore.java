@@ -6,8 +6,7 @@ import java.util.Set;
 public class MiniGameCore {
 
 	/**
-	 * The Set of all the features added into the game
-	 * Has to be a Set, simply because a same Feature can not be added twice
+	 * This Set regroups all the used {@link Feature}s
 	 */
 	private Set<Feature> features;
 	
@@ -21,7 +20,7 @@ public class MiniGameCore {
 	
 	/**
 	 * 
-	 * @return the list of all the present features
+	 * @return the list of all the present features.
 	 * If you can't find a specific feature in the Set, 
 	 * make sure you've called addAsFeature() function earlier
 	 */

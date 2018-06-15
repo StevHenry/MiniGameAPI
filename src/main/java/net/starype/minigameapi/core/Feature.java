@@ -1,12 +1,16 @@
 package net.starype.minigameapi.core;
 
+import net.starype.minigameapi.features.standard.GameDivision;
+
 /**
  * 
- * @author Askigh & Steven
- * Global interface which regroups all the features you may need in your game
- * The List of the features is linked below :
- * <add link>
- *
+ * @author Askigh
+ * @author Steven
+ * <p>Global interface which regroups all the features you may need in your game</p>
+ * <p>The List of the features is linked below :<p>
+ * <ul>
+ * 	<li>{@link GameDivision}</li>
+ * </ul>
  */
 public interface Feature {
 

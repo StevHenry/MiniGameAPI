@@ -3,8 +3,8 @@ package net.starype.minigameapi.tests;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.GameDivision;
-import net.starype.minigameapi.features.events.JoinLeaveManager;
+import net.starype.minigameapi.features.polyvalent.JoinLeaveManager;
+import net.starype.minigameapi.features.standard.GameDivision;
 
 /**
  * 
@@ -18,8 +18,7 @@ public class Test extends JavaPlugin {
 		
 		GameDivision div = new GameDivision(core);
 		//TODO ajouter la feature au core
-		div.addStep(new ExampleState()); //là, c'est un state qui gère les events
-		div.addStep(new ExampleState2()); //là non
+		div.addStep(new ExampleState());
 		
 		
 		/*
@@ -46,10 +45,9 @@ public class Test extends JavaPlugin {
 	
 	public void otherTest() {
 		
-		@SuppressWarnings("unused")
-		JoinLeaveManager jlManager = new JoinLeaveManager(core, null, null)
-				.link()
-				.withDefaultActions(true);
+		JoinLeaveManager jlManager = new JoinLeaveManager(core, null, null);
+		
+		jlManager.addAsFeature();
 	}
 	
 
