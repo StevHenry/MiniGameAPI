@@ -8,6 +8,13 @@ import org.bukkit.Location;
 import net.starype.minigameapi.core.Feature;
 import net.starype.minigameapi.core.MiniGameCore;
 
+/**
+ * TeamManager is a simple Feature which allows you to add teams in your game.
+ * This class contains also a list of {@link Team} as under features
+ * 
+ * @author Askigh
+ *
+ */
 public class TeamManager implements Feature {
 
 	private MiniGameCore source;

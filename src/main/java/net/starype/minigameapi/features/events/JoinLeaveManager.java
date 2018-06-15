@@ -12,9 +12,11 @@ import net.starype.minigameapi.features.GameDivision;
 
 /**
  * 
+ * JoinLeaveManager is a class that can be used as a feature alone or as an under feature
+ * depending of the {@link GameDivision} instance. </p>
+ * 
+ * It also implements the {@link Listener} interface because it contains a PlayerJoinEvent and a PlayerQuitEvent.
  * @author Askigh & Steven
- * JoinLManager...
- *
  */
 public class JoinLeaveManager implements Listener, Feature {
 

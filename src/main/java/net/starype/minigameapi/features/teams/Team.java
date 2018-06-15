@@ -8,6 +8,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+/**
+ * 
+ * Team is a basic class containing all the information you could need to add teams into your game
+ * </p>
+ * Do not call the constructor unless you have a good reason, you should use <code>addNewTeam</code> from {@link TeamManager} 
+ * instead.
+ * @author Askigh
+ *
+ */
 public class Team {
 	
 	private String name;

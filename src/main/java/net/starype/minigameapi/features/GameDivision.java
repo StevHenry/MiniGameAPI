@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.starype.minigameapi.core.Feature;
 import net.starype.minigameapi.core.MiniGameCore;
+import net.starype.minigameapi.features.events.JoinLeaveAction;
 import net.starype.minigameapi.features.events.JoinLeaveManager;
 
 /**
@@ -23,11 +24,24 @@ import net.starype.minigameapi.features.events.JoinLeaveManager;
  */
 public class GameDivision implements Feature {
 
+	// The MiniGame instance you want to complete with this feature, defined in the constructor
 	private MiniGameCore source;
+	
+	/*
+	 * All the actions that have to be executed when the state appear
+	 * The State is registered as a number, see above for further information
+	 */
 	private List<StateChangeAction> steps;
 
-	private int currentStep = 0;
+	/*
+	 * The current state of the game
+	 * Set to 0 (the first state defined) by default
+	 */
+	private int currentState = 0;
 
+	/**
+	 * @param source : The MiniGame instance you want to complete with this feature
+	 */
 	public GameDivision(MiniGameCore source) {
 
 		this.source = source;
@@ -44,10 +58,10 @@ public class GameDivision implements Feature {
 
 	public void changeStep() {
 		
-		if(steps.size() < (currentStep - 1)) {
-			currentStep++;
+		if(steps.size() < (currentState - 1)) {
+			currentState++;
 
-			steps.get(currentStep).executeWhenSet();
+			steps.get(currentState).executeWhenSet();
 
 		}
 	}
@@ -73,13 +87,19 @@ public class GameDivision implements Feature {
 	}
 
 	public int getCurrentStepIndex() {
-		return currentStep;
+		return currentState;
 	}
 
 	public StateChangeAction getCurrentState() {
-		return steps.get(currentStep);
+		return steps.get(currentState);
 	}
 
+	/**
+	 * Interface that contains a single method named executeWhenSet()
+	 * </p>
+	 * This method is called whenever the state changes from an other to the one that contains this action
+	 * @author Askigh & Steven
+	 */
 	public interface StateChangeAction {
 
 		void executeWhenSet();
