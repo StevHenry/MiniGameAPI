@@ -5,13 +5,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.starype.minigameapi.core.Feature;
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.GameDivision;
-import net.starype.minigameapi.features.events.JoinExitManager;
-import net.starype.minigameapi.features.events.JoinLManager;
-import net.starype.minigameapi.features.events.JoinLeaveState;
-import net.starype.minigameapi.samples.JoinLeaveSample;
+import net.starype.minigameapi.features.events.NONUSEDCLASS_JoinExitManager;
+import net.starype.minigameapi.features.events.JoinLeaveManager;
+import net.starype.minigameapi.features.events.JoinLeaveAction;
 
 /**
  * 
@@ -23,26 +21,12 @@ public class Test extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
-		new JoinLeaveSample() {
-			
-			@Override
-			public void onLeave(PlayerQuitEvent event) {
-			}
-			
-			@Override
-			public void onJoin(PlayerJoinEvent event) {
-			}
-			
-			@Override
-			public void executeWhenSet() {
-			}
-		};
 		GameDivision div = new GameDivision(core);
 		//TODO ajouter la feature au core
 		div.addStep(new ExampleState()); //là, c'est un state qui gère les events
 		div.addStep(new ExampleState2()); //là non
 		
-		Bukkit.getPluginManager().registerEvents(new JoinLManager(core, null, new JoinLeaveState() {
+		Bukkit.getPluginManager().registerEvents(new JoinLeaveManager(core, null, new JoinLeaveAction() {
 			
 			@Override
 			public void onLeave(PlayerQuitEvent event) {
@@ -67,6 +51,7 @@ public class Test extends JavaPlugin {
 	
 	public void test() {
 		
+		core.getFeature(null);
 		GameDivision div = new GameDivision(core);
 		div.addAsFeature();
 		
@@ -74,7 +59,7 @@ public class Test extends JavaPlugin {
 		div.addStep(null, STARTING);
 		div.addStep(null, PLAYING);
 
-		JoinExitManager joinexit = new JoinExitManager(core, null);
+		NONUSEDCLASS_JoinExitManager joinexit = new NONUSEDCLASS_JoinExitManager(core, null);
 		joinexit.link();
 		
 		joinexit.addJoinAction(null, WAITING);
@@ -90,7 +75,8 @@ public class Test extends JavaPlugin {
 	
 	public void otherTest() {
 		
-		JoinLManager jlManager = new JoinLManager(core, null, null)
+		@SuppressWarnings("unused")
+		JoinLeaveManager jlManager = new JoinLeaveManager(core, null, null)
 				.link()
 				.withDefaultActions(true);
 	}

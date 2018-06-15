@@ -10,7 +10,13 @@ import net.starype.minigameapi.core.Feature;
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.GameDivision;
 
-public class JoinLManager implements Listener, Feature {
+/**
+ * 
+ * @author Askigh & Steven
+ * JoinLManager...
+ *
+ */
+public class JoinLeaveManager implements Listener, Feature {
 
 	// null if JoinLManager is not linked
 	private GameDivision divisor;
@@ -20,7 +26,7 @@ public class JoinLManager implements Listener, Feature {
 	 *  Defined in the constructor below
 	 *  Used in onJoin() and onLeave() local methods
 	 */
-	private JoinLeaveState defaultAction;
+	private JoinLeaveAction defaultAction;
 	
 	// The MiniGame instance you want to complete with this feature, defined in the constructor
 	private MiniGameCore core;
@@ -44,7 +50,7 @@ public class JoinLManager implements Listener, Feature {
 	 * @param defaultAction : Define the default action applied, see onJoin / onLeave functions for further information. 
 	 * May be null without any problems. 
 	 */
-	public JoinLManager(MiniGameCore core, Plugin main, JoinLeaveState defaultAction) {
+	public JoinLeaveManager(MiniGameCore core, Plugin main, JoinLeaveAction defaultAction) {
 		
 		this.defaultAction = defaultAction;
 		this.core = core;
@@ -57,7 +63,7 @@ public class JoinLManager implements Listener, Feature {
 	 * @throw IllegalStateException if GameDivision has not already been added as a feature
 	 * in the MiniGameCore instance
 	 */
-	public JoinLManager link() {
+	public JoinLeaveManager link() {
 		
 		linked = true;
 		divisor = core.getFeature(GameDivision.class);
@@ -72,7 +78,7 @@ public class JoinLManager implements Listener, Feature {
 	 * and no specific action is defined for the current state
 	 * @return the instance of JoinLManager used to call this function 
 	 */
-	public JoinLManager withDefaultActions(boolean withDefaultAction) {
+	public JoinLeaveManager withDefaultActions(boolean withDefaultAction) {
 		
 		defaultActionIfLinked = withDefaultAction;
 		return this;
@@ -86,8 +92,8 @@ public class JoinLManager implements Listener, Feature {
 		 * This instance may also implements JoinLeaveState, if it's the case we can
 		 * cast and apply onJoin() function.
 		 */
-		if (linked && divisor.getCurrentState() instanceof JoinLeaveState) {
-			((JoinLeaveState) divisor.getCurrentState()).onJoin(e);
+		if (linked && divisor.getCurrentState() instanceof JoinLeaveAction) {
+			((JoinLeaveAction) divisor.getCurrentState()).onJoin(e);
 		} else
 			/*
 			 * If the manager is not linked, we always want to call the default onJoin(),
@@ -108,9 +114,9 @@ public class JoinLManager implements Listener, Feature {
 		 * This instance may also implements JoinLeaveState, if it's the case we can
 		 * cast and apply onLeave() function.
 		 */
-		if (divisor.getCurrentState() instanceof JoinLeaveState) {
+		if (divisor.getCurrentState() instanceof JoinLeaveAction) {
 			
-			((JoinLeaveState) divisor.getCurrentState()).onLeave(e);
+			((JoinLeaveAction) divisor.getCurrentState()).onLeave(e);
 		} else
 			/*
 			 * If the manager is not linked, we always want to call the default onLeave(),

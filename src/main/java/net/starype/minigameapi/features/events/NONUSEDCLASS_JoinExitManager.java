@@ -14,18 +14,18 @@ import net.starype.minigameapi.core.Feature;
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.GameDivision;
 
-public class JoinExitManager implements Feature, Listener {
+public class NONUSEDCLASS_JoinExitManager implements Feature, Listener {
 
 	private MiniGameCore source;
 	private Plugin main;
 	private boolean linked = false;
-	private JoinExitAction join;
-	private JoinExitAction leave;
+	private WillBeDeletedSoon_JoinExitAction join;
+	private WillBeDeletedSoon_JoinExitAction leave;
 	private GameDivision division;
-	private List<JoinExitAction> joinActions;
-	private List<JoinExitAction> leaveActions;
+	private List<WillBeDeletedSoon_JoinExitAction> joinActions;
+	private List<WillBeDeletedSoon_JoinExitAction> leaveActions;
 
-	public JoinExitManager(MiniGameCore source, Plugin main) {
+	public NONUSEDCLASS_JoinExitManager(MiniGameCore source, Plugin main) {
 
 		this.source = source;
 		this.main = main;
@@ -33,7 +33,7 @@ public class JoinExitManager implements Feature, Listener {
 		this.leaveActions = new ArrayList<>();
 	}
 	
-	public void addJoinAction(JoinExitAction action, int index) {
+	public void addJoinAction(WillBeDeletedSoon_JoinExitAction action, int index) {
 		
 		if(!linked) {
 			System.err.println("Error : JoinExitManager is not linked");
@@ -42,7 +42,7 @@ public class JoinExitManager implements Feature, Listener {
 		joinActions.add(index, action);
 	}
 	
-	public void addLeaveAction(JoinExitAction action, int index) {
+	public void addLeaveAction(WillBeDeletedSoon_JoinExitAction action, int index) {
 		
 		if(!linked) {
 			System.err.println("Error : JoinExitManager is not linked");
@@ -58,7 +58,7 @@ public class JoinExitManager implements Feature, Listener {
 		division = source.getFeature(GameDivision.class);
 	}
 
-	public void setGlobalAction(JoinExitAction join, JoinExitAction leave) {
+	public void setGlobalAction(WillBeDeletedSoon_JoinExitAction join, WillBeDeletedSoon_JoinExitAction leave) {
 
 		if(linked) 
 			System.err.println("Error in class JoinExitManager : Cannot set a global action "
@@ -102,7 +102,7 @@ public class JoinExitManager implements Feature, Listener {
 
 	@Override
 	public Class<? extends Feature> getFeature() {
-		return JoinExitManager.class;
+		return NONUSEDCLASS_JoinExitManager.class;
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class JoinExitManager implements Feature, Listener {
 		return linked;
 	}
 
-	public interface JoinExitAction {
+	public interface WillBeDeletedSoon_JoinExitAction {
 
 		void execute(Player player);
 	}
