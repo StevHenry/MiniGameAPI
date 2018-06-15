@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class Team {
 	
 	private String name;
-	private String color;
-	private List<Player> players;
+	private ChatColor color;
 	private Location spawn;
+	private List<Player> players;
 	
-	public Team(String name, String color) {
+	public Team(String name, ChatColor color) {
 		
 		this.setName(name);
 		this.setColor(color);
@@ -29,11 +30,11 @@ public class Team {
 		this.name = name;
 	}
 
-	public String getColor() {
+	public ChatColor getColor() {
 		return color;
 	}
 
-	public void setColor(String color) {
+	public void setColor(ChatColor color) {
 		this.color = color;
 	}
 

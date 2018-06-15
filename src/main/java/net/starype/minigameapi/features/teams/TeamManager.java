@@ -2,6 +2,7 @@ package net.starype.minigameapi.features.teams;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
 import net.starype.minigameapi.core.Feature;
@@ -16,12 +17,12 @@ public class TeamManager implements Feature {
 		this.source = source;
 	}
 	
-	public Team addNewTeam(String name, String color) {
+	public Team addNewTeam(String name, ChatColor color) {
 		
 		return addNewTeam(name, color, null);
 	}
 	
-	public Team addNewTeam(String name, String color, Location spawn) {
+	public Team addNewTeam(String name, ChatColor color, Location spawn) {
 		
 		Team team = new Team(name, color);
 		team.addSpawn(spawn);
@@ -38,7 +39,7 @@ public class TeamManager implements Feature {
 		return null;
 	}
 	
-	public Team getTeamByColor(String color) {
+	public Team getTeamByColor(ChatColor color) {
 		
 		for(Team t : teams)
 			if(t.getColor().equals(color))
@@ -49,7 +50,7 @@ public class TeamManager implements Feature {
 	
 	@Override
 	public Class<? extends Feature> getFeature() {
-		return TeamManager.class;
+		return getClass();
 	}
 
 	@Override

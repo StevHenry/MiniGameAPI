@@ -1,104 +1,72 @@
 package net.starype.minigameapi.features;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.starype.minigameapi.core.Feature;
 import net.starype.minigameapi.core.MiniGameCore;
 
 public class GameDivision implements Feature {
 
-	private int partAmount;
 	private MiniGameCore source;
-	private Map<String, StateChangeAction> steps;
-	private String currentStep;
-	private String defaultStep;
-	
-	public GameDivision(int partAmount, MiniGameCore source) {
-		
-		this.partAmount = partAmount;
+	private List<StateChangeAction> steps;
+
+	private int currentStep = 0;
+
+	public GameDivision(MiniGameCore source) { //Bien vu ! C'était pas loin... Oops!
+
 		this.source = source;
-		this.steps = new HashMap<String, StateChangeAction>();
-	}
-	
-	public void addStep(String step, StateChangeAction action) {
-		
-		steps.put(step, action);
-	}
-	
-	public void addStepAsDefault(String step) {
-		
-		steps.put(step, null);
-		currentStep = step;
-		defaultStep = step;
+		this.steps = new ArrayList<StateChangeAction>();
 	}
 
-	public void execute() {
-		
-		for(String str : steps.keySet())
-			if(str.equals(currentStep))
-				steps.get(str).execute();
+	public void addStep(StateChangeAction action, int index) {
+		steps.add(index, action);
 	}
-	
-	public void executeThenSkip() {
+
+	public void addStep(StateChangeAction action) {
+		steps.add(action);
+	}
+
+	public void changeStep() {
 		
-		execute();
-		boolean found = false;
-		boolean isLast = true;
-		
-		for(String s : steps.keySet()) {
-			
-			if(found) {
-				// The last string was current, now we set the next one
-				currentStep = s;
-				isLast = false;
-			}
-			
-			if(s.equals(currentStep))
-				found = true; // means that the next string will be current
+		if(steps.size() < (currentStep - 1)) {
+			currentStep++;
+
+			steps.get(currentStep).executeWhenSet();
+
 		}
-		
-		if(isLast)
-			currentStep = defaultStep;
 	}
 
 	@Override
 	public Class<? extends Feature> getFeature() {
 		
-		return GameDivision.class;
+		return getClass();
 	}
 
 	@Override
 	public void addAsFeature() {
-		
+
 		source.getFeatures().add(this);
 	}
-	
-	public void analyze() {
-		
-		if(steps.size() != partAmount) throw new IllegalStateException("Incorrect statement : Size of List has to be equal to stepsAmount");
+
+	public int getStepsCount() {
+		return steps.size();
 	}
-	
-	public int getStepsAmount() {
-		
-		return partAmount;
-	}
-	
+
 	public MiniGameCore getSource() {
 		return source;
 	}
-	
-	public interface StateChangeAction {
-		
-		void execute();
-	}
-	
-	public String getCurrentStep() {
-		
+
+	public int getCurrentStepIndex() {
 		return currentStep;
 	}
-	
-	public String getDefaultStep() {
-		return defaultStep;
+
+	public StateChangeAction getCurrentState() {
+		return steps.get(currentStep);
+	}
+
+	public interface StateChangeAction {
+
+		void executeWhenSet();
 	}
 }
