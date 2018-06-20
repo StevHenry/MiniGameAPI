@@ -46,7 +46,7 @@ public class MainClassExample extends JavaPlugin {
 		
 		div.addStep(new WaitingStateExample(core),WAITING);
 		div.addStep(new PlayingStateExample(core), PLAYING);
-		div.addStep(new EndStateSample(), END);
+		div.addStep(new EndStateExample(), END);
 		div.addAsFeature();		
 	}
 

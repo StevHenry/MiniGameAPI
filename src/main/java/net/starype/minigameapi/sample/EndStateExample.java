@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 import net.starype.minigameapi.features.actions.StateChangeAction;
 
-public class EndStateSample implements StateChangeAction {
+public class EndStateExample implements StateChangeAction {
 
 	private Player winner;
 

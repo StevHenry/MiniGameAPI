@@ -35,7 +35,7 @@ public class PlayingStateExample implements StateChangeAction, ItemActionnable {
 				
 				GameDivision division = core.getFeature(GameDivision.class).get();
 				StateChangeAction endAction = division.getStateByIndex(division.getCurrentStepIndex() + 1);
-				((EndStateSample) endAction).setWinner(event.getPlayer());
+				((EndStateExample) endAction).setWinner(event.getPlayer());
 				
 				division.changeStep();
 			}
