@@ -8,7 +8,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.action.JoinLeaveAction;
+import net.starype.minigameapi.features.actions.GameAction;
+import net.starype.minigameapi.features.actions.JoinLeaveAction;
 import net.starype.minigameapi.features.standard.GameDivision;
 import net.starype.minigameapi.features.types.StandardFeature;
 import net.starype.minigameapi.features.types.PolyvalentFeature;
@@ -74,7 +75,7 @@ public class JoinLeaveManager implements Listener, PolyvalentFeature {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends SubFeature> T link() {
+	public <T extends SubFeature> T link(GameAction optionalAction) {
 		
 		linked = true;
 		divisor = core.getFeature(GameDivision.class).get();
@@ -155,7 +156,11 @@ public class JoinLeaveManager implements Listener, PolyvalentFeature {
 	 */
 	@Override
 	public void addAsFeature() {
-		core.getFeatures().add(this);
+		
+		if(!linked)
+			core.getFeatures().add(this);
+		else System.err.println("Cannot add a linked feature");
+		
 		Bukkit.getPluginManager().registerEvents(this, main);
 	}
 

@@ -11,7 +11,9 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.Plugin;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.action.RespawnAction;
+import net.starype.minigameapi.features.actions.GameAction;
+import net.starype.minigameapi.features.actions.RespawnAction;
+import net.starype.minigameapi.features.polyvalent.listed.Respawn;
 import net.starype.minigameapi.features.standard.GameDivision;
 import net.starype.minigameapi.features.types.StandardFeature;
 import net.starype.minigameapi.features.types.PolyvalentFeature;
@@ -117,18 +119,6 @@ public class RespawnManager implements Listener, PolyvalentFeature {
 			}
 	}
 
-	/**
-	 *  <p>Overrided method from the {@link StandardFeature} interface </p>
-	 *  <p>Also adds the instance as an event using the JavaPlugin parameter defined
-	 *  in the constructor</p>
-	 */
-	@Override
-	public void addAsFeature() {
-
-		source.getFeatures().add(this);
-		Bukkit.getPluginManager().registerEvents(this, main);
-	}
-
 	@EventHandler
 	public void respawn(PlayerRespawnEvent event) {
 
@@ -186,7 +176,7 @@ public class RespawnManager implements Listener, PolyvalentFeature {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends SubFeature> T link() {
+	public <T extends SubFeature> T link(GameAction optionalAction) {
 
 		linked = true;
 		division = source.getFeature(GameDivision.class).get();
@@ -207,5 +197,26 @@ public class RespawnManager implements Listener, PolyvalentFeature {
 	@Override
 	public Class<? extends StandardFeature> getFeature() {
 		return getClass();
+	}
+
+	/**
+	 *  <p>Overrided method from the {@link StandardFeature} interface </p>
+	 *  <p>Also adds the instance as an event using the JavaPlugin parameter defined
+	 *  in the constructor</p>
+	 */
+	@Override
+	public void addAsFeature() {
+
+		if(!linked)
+			source.getFeatures().add(this);
+		
+		else System.err.println("Cannot add a linked feature");
+		
+		Bukkit.getPluginManager().registerEvents(this, main);
+	}
+
+	public void addDefaultAction(Respawn respawn) {
+		
+		this.defaultActions.add(respawn);
 	}
 }

@@ -1,4 +1,4 @@
-package net.starype.minigameapi.features.action;
+package net.starype.minigameapi.features.actions;
 
 
 /**
@@ -10,7 +10,7 @@ package net.starype.minigameapi.features.action;
  * @author Askigh
  * @author Steven
  */
-public interface StateChangeAction {
+public interface StateChangeAction extends GameAction {
 
 	void executeWhenSet();
 }

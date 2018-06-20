@@ -5,6 +5,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.polyvalent.JoinLeaveManager;
 import net.starype.minigameapi.features.standard.GameDivision;
+import net.starype.minigameapi.features.standard.TeamManager;
+import net.starype.minigameapi.features.subfeature.Team;
 
 /**
  * <p>This class is just used to do tests, it's not usefull at all</p>
@@ -45,7 +47,10 @@ public class Test extends JavaPlugin {
 		
 		JoinLeaveManager jlManager = new JoinLeaveManager(core, null, null)
 				.withDefaultActions(true)
-				.link();
+				.link(null);
+		
+		TeamManager manager = new TeamManager(null);
+		new Team(null, null, null).link(null);
 		
 	}
 	

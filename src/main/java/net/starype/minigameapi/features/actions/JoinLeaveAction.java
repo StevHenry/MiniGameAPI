@@ -1,4 +1,4 @@
-package net.starype.minigameapi.features.action;
+package net.starype.minigameapi.features.actions;
 
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -12,7 +12,7 @@ import net.starype.minigameapi.features.standard.GameDivision;
  * @author Askigh
  * @author Steven
  */
-public interface JoinLeaveAction {
+public interface JoinLeaveAction extends GameAction {
 	
 	void onJoin(PlayerJoinEvent event);
 	

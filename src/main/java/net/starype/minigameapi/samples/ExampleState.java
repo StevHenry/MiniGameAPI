@@ -10,14 +10,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import net.starype.minigameapi.features.action.JoinLeaveAction;
-import net.starype.minigameapi.features.action.RespawnAction;
-import net.starype.minigameapi.features.action.StateChangeAction;
-import net.starype.minigameapi.features.polyvalent.Respawn;
+import net.starype.minigameapi.features.actions.ItemActionnable;
+import net.starype.minigameapi.features.actions.JoinLeaveAction;
+import net.starype.minigameapi.features.actions.RespawnAction;
+import net.starype.minigameapi.features.actions.StateChangeAction;
+import net.starype.minigameapi.features.polyvalent.listed.Respawn;
+import net.starype.minigameapi.features.subfeature.CustomItem;
 
-public class ExampleState implements StateChangeAction, JoinLeaveAction, RespawnAction {
+public class ExampleState implements StateChangeAction, JoinLeaveAction, RespawnAction, ItemActionnable {
 
 	private List<Respawn> respawns;
+	private List<CustomItem> items;
 
 	@Override
 	public void executeWhenSet() {
@@ -35,19 +38,20 @@ public class ExampleState implements StateChangeAction, JoinLeaveAction, Respawn
 		Bukkit.broadcastMessage("leave");
 	}
 
-	@Override
+	// this doesn't have to be in this class
 	public void createRespawns() {
 
 		List<Respawn> respawns = new ArrayList<>();
 
-		Respawn forPlayers = new Respawn(Arrays.asList(Bukkit.getPlayer("Askigh"))) {
+		Respawn forPlayers = new Respawn(null, Arrays.asList(Bukkit.getPlayer("Askigh"))) {
 
 			@Override
 			public void execute(Player target) {
-				target.setGameMode(GameMode.SPECTATOR);
+				target.setGameMode(GameMode.ADVENTURE);
 			}
 		};
-		Respawn forSpecs = new Respawn(Arrays.asList(Bukkit.getPlayer("Lolilolulolilol"))) {
+		
+		Respawn forSpecs = new Respawn(null, Arrays.asList(Bukkit.getPlayer("Lolilolulolilol"))) {
 
 			@Override
 			public void execute(Player target) {
@@ -57,13 +61,21 @@ public class ExampleState implements StateChangeAction, JoinLeaveAction, Respawn
 
 		respawns.add(forPlayers);
 		respawns.add(forSpecs);
+		
 		this.respawns = respawns;
+		forPlayers.link(this);
+		forSpecs.link(this);
 	}
 
 	@Override
 	public List<Respawn> getRespawns() {
 
 		return respawns;
+	}
+
+	@Override
+	public List<CustomItem> getItems() {
+		return items;
 	}
 
 

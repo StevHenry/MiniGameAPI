@@ -24,6 +24,10 @@ public class TeamManager implements StandardFeature {
 	public TeamManager(MiniGameCore source) {
 		this.source = source;
 	}
+
+	public void addNewTeam(Team team) {
+		teams.add(team);
+	}
 	
 	public Team addNewTeam(String name, ChatColor color) {
 		
@@ -32,7 +36,7 @@ public class TeamManager implements StandardFeature {
 	
 	public Team addNewTeam(String name, ChatColor color, Location spawn) {
 		
-		Team team = new Team(name, color);
+		Team team = new Team(name, color, source);
 		team.addSpawn(spawn);
 		teams.add(team);
 		return team;
@@ -71,5 +75,6 @@ public class TeamManager implements StandardFeature {
 		
 		return source;
 	}
+
 
 }

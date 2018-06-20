@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.action.JoinLeaveAction;
-import net.starype.minigameapi.features.action.StateChangeAction;
+import net.starype.minigameapi.features.actions.JoinLeaveAction;
+import net.starype.minigameapi.features.actions.StateChangeAction;
 import net.starype.minigameapi.features.polyvalent.JoinLeaveManager;
 import net.starype.minigameapi.features.types.StandardFeature;
 
