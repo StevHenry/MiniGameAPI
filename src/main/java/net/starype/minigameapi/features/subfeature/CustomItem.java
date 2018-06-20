@@ -2,6 +2,7 @@ package net.starype.minigameapi.features.subfeature;
 
 import java.util.Optional;
 
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -16,11 +17,14 @@ public abstract class CustomItem implements SubFeature {
 	
 	private ItemStack item;
 	private MiniGameCore core;
-	
-	public CustomItem(MiniGameCore core, ItemStack item) {
+	private Action[] clicks;
+	 
+	public CustomItem(MiniGameCore core, ItemStack item, Action... clicks) {
 		
 		this.item = item;
 		this.core = core;
+		this.clicks = clicks;
+		
 	}
 	
 	public abstract void execute(PlayerInteractEvent event);
@@ -58,5 +62,10 @@ public abstract class CustomItem implements SubFeature {
 	@Override
 	public Class<? extends StandardFeature> getLinkedTo() {
 		return ItemInteraction.class;
+	}
+	
+	public Action[] getClickOption() {
+		
+		return clicks;
 	}
 }

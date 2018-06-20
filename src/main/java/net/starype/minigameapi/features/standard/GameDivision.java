@@ -61,11 +61,9 @@ public class GameDivision implements StandardFeature {
 
 	public void changeStep() {
 		
-		if(steps.size() < (currentState - 1)) {
+		if(steps.size() > currentState + 1) {
 			currentState++;
-
 			steps.get(currentState).executeWhenSet();
-
 		}
 	}
 
@@ -95,6 +93,10 @@ public class GameDivision implements StandardFeature {
 
 	public StateChangeAction getCurrentState() {
 		return steps.get(currentState);
+	}
+
+	public StateChangeAction getStateByIndex(int i) {
+		return steps.get(i);
 	}
 
 }

@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import net.starype.minigameapi.core.MiniGameCore;
@@ -48,20 +48,31 @@ public class ItemInteraction implements PolyvalentFeature, Listener {
 	
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
-		
-		ItemStack eventItem = event.getItem();
-		
+				
 		if(linked && division.getCurrentState() instanceof ItemActionnable) {
 			
 			for(CustomItem item : ((ItemActionnable) division.getCurrentState()).getItems())
-				if(eventItem.equals(item.getItem()))
+				if(canExecute(event, item))
 					item.execute(event);
 		}
 		
 		else if(!linked || (linked && defaultActionIfLinked))
 			for(CustomItem item : defaultItems)
-				if(eventItem.equals(item.getItem()))
+				if(canExecute(event, item))
 					item.execute(event);
+	}
+	
+	private boolean canExecute(PlayerInteractEvent event, CustomItem item) {
+				
+		if(event.getItem().equals(item.getItem()) || item.getClickOption() == null)
+			return true;
+		
+		for(Action action : item.getClickOption())
+			if(action == event.getAction())
+				return true;
+		
+		return false;
+		
 	}
 
 	@Override
@@ -95,5 +106,4 @@ public class ItemInteraction implements PolyvalentFeature, Listener {
 	public Class<? extends StandardFeature> getLinkedTo() {
 		return GameDivision.class;
 	}
-
 }
