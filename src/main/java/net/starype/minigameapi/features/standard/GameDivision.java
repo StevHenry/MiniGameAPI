@@ -5,9 +5,9 @@ import java.util.List;
 
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.actions.JoinLeaveAction;
-import net.starype.minigameapi.features.actions.StateChangeAction;
 import net.starype.minigameapi.features.polyvalent.JoinLeaveManager;
 import net.starype.minigameapi.features.types.StandardFeature;
+import net.starype.minigameapi.multilinkable.StateChangeAction;
 
 /**
  * <p>GameDivision is feature allowing you to cut your game in different parts.</p>

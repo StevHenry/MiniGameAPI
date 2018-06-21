@@ -1,6 +1,6 @@
 package net.starype.minigameapi.features.types;
 
-import net.starype.minigameapi.features.actions.GameAction;
+import net.starype.minigameapi.features.actions.MultiLinkable;
 
 public interface SubFeature {
 
@@ -15,7 +15,7 @@ public interface SubFeature {
 	 * to use. In this example, the GameAction has to be an ItemActionnable. The list of CustomItem from this
 	 * Actionnable will be automatically completed with this instance that you have just linked
 	 */
-	<T extends SubFeature> T link(GameAction optionalAction);
+	<T extends SubFeature> T link(MultiLinkable optionalAction);
 	
 	/**
 	 * 

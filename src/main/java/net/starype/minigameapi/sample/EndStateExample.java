@@ -3,7 +3,7 @@ package net.starype.minigameapi.sample;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import net.starype.minigameapi.features.actions.StateChangeAction;
+import net.starype.minigameapi.multilinkable.StateChangeAction;
 
 public class EndStateExample implements StateChangeAction {
 

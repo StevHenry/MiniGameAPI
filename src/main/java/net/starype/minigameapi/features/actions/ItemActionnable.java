@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.starype.minigameapi.features.subfeature.CustomItem;
 
-public interface ItemActionnable extends GameAction {
+public interface ItemActionnable {
 	
 	List<CustomItem> getItems();
-}
+}	

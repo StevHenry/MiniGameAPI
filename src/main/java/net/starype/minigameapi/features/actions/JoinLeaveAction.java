@@ -12,7 +12,7 @@ import net.starype.minigameapi.features.standard.GameDivision;
  * @author Askigh
  * @author Steven
  */
-public interface JoinLeaveAction extends GameAction {
+public interface JoinLeaveAction {
 	
 	void onJoin(PlayerJoinEvent event);
 	

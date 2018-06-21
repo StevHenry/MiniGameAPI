@@ -1,5 +1,6 @@
 package net.starype.minigameapi.features.polyvalent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -11,13 +12,14 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.Plugin;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.actions.GameAction;
+import net.starype.minigameapi.features.actions.MultiLinkable;
 import net.starype.minigameapi.features.actions.RespawnAction;
-import net.starype.minigameapi.features.polyvalent.listed.Respawn;
 import net.starype.minigameapi.features.standard.GameDivision;
+import net.starype.minigameapi.features.subfeature.Respawn;
 import net.starype.minigameapi.features.types.StandardFeature;
 import net.starype.minigameapi.features.types.PolyvalentFeature;
 import net.starype.minigameapi.features.types.SubFeature;
+import net.starype.minigameapi.multilinkable.StateChangeAction;
 
 /**
  * <p>RespawnManager is a Polyvalent Feature, therefore it that can be used as a feature alone or as a sub feature
@@ -62,15 +64,12 @@ public class RespawnManager implements Listener, PolyvalentFeature {
 	 * 	The MiniGame instance you want to complete with this feature
 	 * @param main
 	 * 	The JavaPlugin instance, used to register the Listener
-	 * @param defaultActions
-	 * 	The list of default actions applied if the instance is not linked
-	 * 	or if the instance is linked and defaultActionIfLinked is true
 	 */
-	public RespawnManager(MiniGameCore source, Plugin main, List<Respawn> defaultActions) {
+	public RespawnManager(MiniGameCore source, Plugin main) {
 
 		this.source = source;
 		this.main = main;
-		this.defaultActions = defaultActions;
+		this.defaultActions = new ArrayList<Respawn>();
 	}
 
 	/**
@@ -89,9 +88,22 @@ public class RespawnManager implements Listener, PolyvalentFeature {
 	 * Sets the default actions applied
 	 * @param actions : The list of Respawn actions applied if a default action has to be called
 	 */
-	public void addDefaultAction(List<Respawn> actions) {
+	public void setDefaultActions(List<Respawn> actions) {
 
 		this.defaultActions = actions;
+	}
+
+	public void addDefaultAction(Respawn respawn) {
+		
+		this.defaultActions.add(respawn);
+	}
+	
+	public void addAction(Respawn respawn, StateChangeAction stateAction) {
+		
+		if(stateAction instanceof RespawnAction)
+			((RespawnAction) stateAction).addRespawn(respawn);
+		
+		else throw new IllegalStateException("The StateChangeAction has to be a RespawnAction as well");
 	}
 
 	/**
@@ -176,7 +188,7 @@ public class RespawnManager implements Listener, PolyvalentFeature {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends SubFeature> T link(GameAction optionalAction) {
+	public <T extends SubFeature> T link(MultiLinkable optionalAction) {
 
 		linked = true;
 		division = source.getFeature(GameDivision.class).get();
@@ -215,8 +227,4 @@ public class RespawnManager implements Listener, PolyvalentFeature {
 		Bukkit.getPluginManager().registerEvents(this, main);
 	}
 
-	public void addDefaultAction(Respawn respawn) {
-		
-		this.defaultActions.add(respawn);
-	}
 }

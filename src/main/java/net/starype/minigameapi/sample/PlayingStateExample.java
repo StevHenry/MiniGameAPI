@@ -10,9 +10,9 @@ import org.bukkit.inventory.ItemStack;
 
 import net.starype.minigameapi.core.MiniGameCore;
 import net.starype.minigameapi.features.actions.ItemActionnable;
-import net.starype.minigameapi.features.actions.StateChangeAction;
 import net.starype.minigameapi.features.standard.GameDivision;
 import net.starype.minigameapi.features.subfeature.CustomItem;
+import net.starype.minigameapi.multilinkable.StateChangeAction;
 
 public class PlayingStateExample implements StateChangeAction, ItemActionnable {
 

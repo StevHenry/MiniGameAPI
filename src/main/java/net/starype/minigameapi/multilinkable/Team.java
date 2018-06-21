@@ -1,4 +1,4 @@
-package net.starype.minigameapi.features.subfeature;
+package net.starype.minigameapi.multilinkable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.actions.GameAction;
+import net.starype.minigameapi.features.actions.MultiLinkable;
 import net.starype.minigameapi.features.standard.TeamManager;
-import net.starype.minigameapi.features.types.StandardFeature;
-import net.starype.minigameapi.features.types.SubFeature;
+import net.starype.minigameapi.features.subfeature.TeamOption;
 
 /**
  * <p>Team is a basic class containing all the information you could need to add teams into your game</p>
@@ -22,41 +21,21 @@ import net.starype.minigameapi.features.types.SubFeature;
  * @author Askigh
  * @author Steven
  */
-public class Team implements SubFeature {
+public class Team implements MultiLinkable {
 	
 	private String name;
 	private ChatColor color;
 	private Location spawn;
 	private List<Player> players;
-	private TeamManager manager;
-	private MiniGameCore core;
+	private String chatPrefix;
+	private String chatCommand;
+	private TeamOption option;
 	
 	public Team(String name, ChatColor color, MiniGameCore core) {
 		
 		this.setName(name);
 		this.setColor(color);
 		this.players = new ArrayList<>();
-		this.core = core;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends SubFeature> T link(GameAction optionalAction) {
-		
-		Optional<TeamManager> teamManager = core.getFeature(TeamManager.class);
-		
-		if(teamManager.isPresent()) {
-			this.manager = teamManager.get();
-			manager.addNewTeam(this);
-		} else throw new IllegalStateException("Cannot link if TeamManager is undefined");
-		
-		return (T) this;
-	}
-
-	@Override
-	public Class<? extends StandardFeature> getLinkedTo() {
-		
-		return TeamManager.class;
 	}
 	
 	public String getName() {
@@ -90,6 +69,33 @@ public class Team implements SubFeature {
 	public Optional<Location> getSpawn() {
 		
 		return Optional.ofNullable(spawn);
+	}
+
+	public String getChatPrefix() {
+		return chatPrefix;
+	}
+
+	public Team withChatPrefix(String chatPrefix) {
+		
+		this.chatPrefix = chatPrefix;
+		return this;
+	}
+
+	public String getChatCommand() {
+		return chatCommand;
+	}
+
+	public Team withChatCommand(String chatCommand) {
+		this.chatCommand = chatCommand;
+		return this;
+	}
+
+	public TeamOption getOption() {
+		return option;
+	}
+
+	public void setOption(TeamOption option) {
+		this.option = option;
 	}
 
 }

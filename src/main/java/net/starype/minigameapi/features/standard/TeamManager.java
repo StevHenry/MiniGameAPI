@@ -1,13 +1,15 @@
 package net.starype.minigameapi.features.standard;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.subfeature.Team;
 import net.starype.minigameapi.features.types.StandardFeature;
+import net.starype.minigameapi.multilinkable.Team;
 
 /**
  * TeamManager is a simple Feature which allows you to add teams in your game.
@@ -27,6 +29,15 @@ public class TeamManager implements StandardFeature {
 
 	public void addNewTeam(Team team) {
 		teams.add(team);
+	}
+	
+	public Optional<Team> findTeamByPlayer(Player target) {
+		
+		for(Team t : teams)
+			if(t.getPlayers().contains(target))
+				return Optional.of(t);
+		
+		return Optional.empty();
 	}
 	
 	public Team addNewTeam(String name, ChatColor color) {
@@ -74,6 +85,10 @@ public class TeamManager implements StandardFeature {
 	public MiniGameCore getSource() {
 		
 		return source;
+	}
+	
+	public List<Team> getTeams() {
+		return teams;
 	}
 
 

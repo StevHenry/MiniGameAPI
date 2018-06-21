@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.actions.GameAction;
+import net.starype.minigameapi.features.actions.MultiLinkable;
 import net.starype.minigameapi.features.actions.JoinLeaveAction;
 import net.starype.minigameapi.features.standard.GameDivision;
 import net.starype.minigameapi.features.types.StandardFeature;
@@ -75,7 +75,7 @@ public class JoinLeaveManager implements Listener, PolyvalentFeature {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends SubFeature> T link(GameAction optionalAction) {
+	public <T extends SubFeature> T link(MultiLinkable optionalAction) {
 		
 		linked = true;
 		divisor = core.getFeature(GameDivision.class).get();

@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.actions.GameAction;
+import net.starype.minigameapi.features.actions.MultiLinkable;
 import net.starype.minigameapi.features.actions.ItemActionnable;
 import net.starype.minigameapi.features.standard.GameDivision;
 import net.starype.minigameapi.features.subfeature.CustomItem;
@@ -92,7 +92,7 @@ public class ItemInteraction implements PolyvalentFeature, Listener {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends SubFeature> T link(GameAction optionalAction) {
+	public <T extends SubFeature> T link(MultiLinkable optionalAction) {
 
 		linked = true;
 		

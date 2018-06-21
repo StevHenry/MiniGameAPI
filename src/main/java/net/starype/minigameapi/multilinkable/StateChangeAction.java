@@ -1,5 +1,6 @@
-package net.starype.minigameapi.features.actions;
+package net.starype.minigameapi.multilinkable;
 
+import net.starype.minigameapi.features.actions.MultiLinkable;
 
 /**
  * <p>Interface that contains a single method named executeWhenSet()</p>
@@ -10,7 +11,7 @@ package net.starype.minigameapi.features.actions;
  * @author Askigh
  * @author Steven
  */
-public interface StateChangeAction extends GameAction {
+public interface StateChangeAction extends MultiLinkable {
 
 	void executeWhenSet();
 }

@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.starype.minigameapi.core.MiniGameCore;
-import net.starype.minigameapi.features.actions.GameAction;
+import net.starype.minigameapi.features.actions.MultiLinkable;
 import net.starype.minigameapi.features.actions.ItemActionnable;
 import net.starype.minigameapi.features.polyvalent.ItemInteraction;
 import net.starype.minigameapi.features.types.StandardFeature;
@@ -35,7 +35,7 @@ public abstract class CustomItem implements SubFeature {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends SubFeature> T link(GameAction optionalAction) {
+	public <T extends SubFeature> T link(MultiLinkable optionalAction) {
 		
 		Optional<ItemInteraction> interaction = core.getFeature(ItemInteraction.class);
 		
