@@ -12,7 +12,7 @@ import net.starype.minigameapi.features.types.StandardFeature;
 
 public class MiniGameCore {
 	
-	/*
+	/**
 	 * The List of all the players in the game
 	 * You mustn't use it if you don't want to
 	 * It's a content that can be useful, to escape keeping an instance of a list of players everywhere
