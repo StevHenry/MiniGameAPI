@@ -1,19 +1,47 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
 group 'net.starype.minigameapi'
 version 'alpha'
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
+def minecraftAPIName = "spigot"
+def minecraftAPIVersion = "1.12.2"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+compileJava.options.encoding = 'UTF-8'
+project.buildDir = "/generated"
+
 repositories {
-	mavenCentral()
-	maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-	maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    mavenCentral()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 dependencies {
-	compileOnly 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
-	compileOnly 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT' 
+    //LOGGER
+    compile 'org.slf4j:slf4j-api:1.8.0-beta2'
+    runtime 'org.apache.logging.log4j:log4j-slf4j-impl:2.11.0'
+
+    //SPIGOT
+    compileOnly 'org.spigotmc:spigot-api:' + minecraftAPIVersion + '-R0.1-SNAPSHOT'
+    compileOnly 'org.bukkit:bukkit:' + minecraftAPIVersion + '-R0.1-SNAPSHOT'
+}
+
+shadowJar {
+    getArchiveBaseName().set("MiniGameAPI-" + minecraftAPIName + minecraftAPIVersion)
+    getArchiveVersion().set("V" + project.getVersion())
+    getArchiveClassifier().set('')
+}
+
+task move(type: Copy, dependsOn:shadowJar) {
+    if(project.hasProperty("movingPath")){
+        from "$buildDir/libs"
+        into project.findProperty("movingPath")
+        include "*.*"
+    } else {
+        logger.error("Moving path undefined ! Cannot move file.")
+    }
 }
